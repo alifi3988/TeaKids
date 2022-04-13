@@ -6,6 +6,9 @@ import 'package:kids/view/login.dart';
 import 'package:kids/view/memoria.dart';
 import 'package:kids/view/principal.dart';
 import 'package:kids/view/raciocinio.dart';
+import 'package:kids/view/recuperar.dart';
+import 'package:kids/view/relatorio.dart';
+import 'package:kids/view/sobre.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -14,12 +17,15 @@ void main() => runApp(
         initialRoute: 't1',
         routes: {
           't1': (context) => const Login(),
-          't2': (context) => Principal(),
+          't2': (context) => const Principal(),
           't3': (context) => Tela1(),
           't4': (context) => Tela2(),
           't5': (context) => Tela3(),
           't6': (context) => Tela4(),
           't7': (context) => Cadastro(),
+          't8': (context) => const Relatorio(),
+          't9': (context) => Sobre(),
+          't10': (context) => const Recuperar(),
         },
       ),
     );

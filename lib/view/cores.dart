@@ -25,7 +25,7 @@ class _Tela2State extends State<Tela2> {
             'JOGO DAS CORES',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.indigo.shade600,
         ));
   }
 }

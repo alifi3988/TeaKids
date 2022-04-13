@@ -25,7 +25,7 @@ class _Tela4State extends State<Tela4> {
             'FIGURA DE ANIMAIS',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.indigo.shade600,
         ));
   }
 }

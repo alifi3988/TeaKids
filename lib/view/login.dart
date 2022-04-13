@@ -197,7 +197,7 @@ class _LoginState extends State<Login> {
   recuperar() {
     return TextButton(
       onPressed: () {
-        caixaDialogo('Página em construção');
+        Navigator.pushNamed(context, 't10');
       },
       style: TextButton.styleFrom(primary: Colors.black),
       child: const Text("Recuperar a senha"),
@@ -207,6 +207,7 @@ class _LoginState extends State<Login> {
   //
   // CAIXA DE DIÁLOGO
   //
+
   caixaDialogo(msg) {
     return showDialog(
         context: context,

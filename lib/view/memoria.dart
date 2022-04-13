@@ -27,7 +27,7 @@ class _Tela1State extends State<Tela1> {
             'JOGO DA MEMÓRIA',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.indigo.shade600,
         ));
   }
 }

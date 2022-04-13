@@ -25,7 +25,7 @@ class _Tela3State extends State<Tela3> {
             'JOGO DE RACIOCÍNIO',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.indigo.shade600,
         ));
   }
 }
