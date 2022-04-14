@@ -17,7 +17,7 @@ void main() => runApp(
         initialRoute: 't1', //primeira tela a ser chamada
         routes: {
           //rotulos das telas, para faciliar chamá-las
-          //terá a criação da tela de apresentação
+          //terá a criação da tela de apresentação Splash Screen
           't1': (context) => const Login(),
           't2': (context) => const Principal(),
           't3': (context) => Tela1(),

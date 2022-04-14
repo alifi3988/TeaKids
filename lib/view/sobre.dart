@@ -13,7 +13,7 @@ class _SobreState extends State<Sobre> {
         title: const Text('Sobre'),
         backgroundColor: Colors.indigo.shade600,
       ),
-      body: const Text("    Informações sobre o App"),
+      body: const Center(child: Text("    Informações sobre o App")),
     );
   }
 }

@@ -44,6 +44,10 @@ class _LoginState extends State<Login> {
             campoSenha(),
             const SizedBox(height: 35),
             botao("Entrar"),
+
+            //o botão login com o google, vai vir aqui
+            //vamos add o ícone do facebook tbb
+
             const SizedBox(height: 140),
             cadastar(),
             const SizedBox(height: 10),
