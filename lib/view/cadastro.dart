@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Cadastro extends StatefulWidget {
+  const Cadastro({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _CadastroState();
 }
