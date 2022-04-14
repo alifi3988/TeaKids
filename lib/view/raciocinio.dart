@@ -9,16 +9,14 @@ class _Tela3State extends State<Tela3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          child: ListView(
-            children: <Widget>[
-              SizedBox(
-                width: 400,
-                height: 650,
-                child: Image.asset("lib/imagens/8_teste.png"),
-              ),
-            ],
-          ),
+        body: ListView(
+          children: <Widget>[
+            SizedBox(
+              width: 400,
+              height: 650,
+              child: Image.asset("lib/imagens/8_teste.png"),
+            ),
+          ],
         ),
         appBar: AppBar(
           title: const Text(

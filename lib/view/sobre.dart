@@ -10,12 +10,10 @@ class _SobreState extends State<Sobre> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sobre'),
+        title: const Text('Sobre'),
         backgroundColor: Colors.indigo.shade600,
       ),
-      body: Container(
-        child: Text("    Informações sobre o App"),
-      ),
+      body: const Text("    Informações sobre o App"),
     );
   }
 }

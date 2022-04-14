@@ -17,6 +17,7 @@ void main() => runApp(
         initialRoute: 't1', //primeira tela a ser chamada
         routes: {
           //rotulos das telas, para faciliar chamá-las
+          //terá a criação da tela de apresentação
           't1': (context) => const Login(),
           't2': (context) => const Principal(),
           't3': (context) => Tela1(),
@@ -27,6 +28,7 @@ void main() => runApp(
           't8': (context) => const Relatorio(),
           't9': (context) => Sobre(),
           't10': (context) => const Recuperar(),
+          //terá a criação da tela de relatório (pensar em como será essa telá, para quem mandará)
         },
       ),
     );

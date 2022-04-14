@@ -13,8 +13,9 @@ class _LoginState extends State<Login> {
   //Declaração dos atributos que serão usado
   //s para
   //armazenar os dados informados pelo usuário
-  TextEditingController _mailInputController = TextEditingController();
-  TextEditingController _passwordINputController = TextEditingController();
+  final TextEditingController _mailInputController = TextEditingController();
+  final TextEditingController _passwordINputController =
+      TextEditingController();
 
   //Declaração de um atributo que identifica unicamente
   //o formulário

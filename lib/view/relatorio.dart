@@ -16,7 +16,7 @@ class _RelatorioState extends State<Relatorio> {
         title: Text('Relatório'),
         backgroundColor: Colors.indigo.shade600,
       ),
-      body: SizedBox(
+      body: const SizedBox(
         child: Text("    Nessa campo mostrará informações sobre o andamento"),
       ),
     );

@@ -15,12 +15,12 @@ class _PrincipaState extends State<Principal> {
       drawer: Drawer(
         ///menu lateral
         child: Container(
-          color: Color.fromARGB(255, 203, 200, 230),
+          color: const Color.fromARGB(255, 203, 200, 230),
           child: Scaffold(
             backgroundColor: Colors.blue[50],
             floatingActionButton: FloatingActionButton(
               /// botão flutuante no menu lateral
-              child: Text(
+              child: const Text(
                 "Sobre",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold),
