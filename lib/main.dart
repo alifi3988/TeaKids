@@ -13,9 +13,10 @@ import 'package:kids/view/sobre.dart';
 void main() => runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'TEA KIDS',
-        initialRoute: 't1',
+        title: 'TEA KIDS', //nome do porjeto
+        initialRoute: 't1', //primeira tela a ser chamada
         routes: {
+          //rotulos das telas, para faciliar chamá-las
           't1': (context) => const Login(),
           't2': (context) => const Principal(),
           't3': (context) => Tela1(),
