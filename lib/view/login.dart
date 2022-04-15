@@ -1,5 +1,3 @@
-// ignore: unnecessary_import
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -47,7 +45,7 @@ class _LoginState extends State<Login> {
 
             //o botão login com o google, vai vir aqui
             //vamos add o ícone do facebook tbb
-
+            //const Divider(color: Colors.black),
             const SizedBox(height: 140),
             cadastar(),
             const SizedBox(height: 10),
@@ -94,30 +92,31 @@ class _LoginState extends State<Login> {
   //CAMPO DA SENHA
   campoSenha() {
     return TextFormField(
-        //variável associada
-        validator: (value) {
-          if (value!.length < 6) {
-            return caixaDialogo("A senhora deve ter pelo menos 6 caracteres");
-          }
-        },
-        keyboardType: TextInputType.text,
-        controller: _passwordINputController,
-        obscureText: true,
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.grey.shade900,
+      //variável associada
+      validator: (value) {
+        if (value!.length < 6) {
+          return caixaDialogo("A senhora deve ter pelo menos 6 caracteres");
+        }
+      },
+      keyboardType: TextInputType.text,
+      controller: _passwordINputController,
+      obscureText: true,
+      style: TextStyle(
+        fontSize: 20,
+        color: Colors.grey.shade900,
+      ),
+      decoration: InputDecoration(
+        labelText: "Senha",
+        labelStyle: TextStyle(
+          fontSize: 17,
+          color: Colors.grey.shade600,
         ),
-        decoration: InputDecoration(
-          labelText: "Senha",
-          labelStyle: TextStyle(
-            fontSize: 17,
-            color: Colors.grey.shade600,
-          ),
-          hintText: 'Informe a senha',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ));
+        hintText: 'Informe a senha',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    );
   }
 
   // BOTÃO

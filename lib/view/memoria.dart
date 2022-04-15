@@ -10,16 +10,14 @@ class _Tela1State extends State<Tela1> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        body: Container(
-          child: ListView(
-            children: <Widget>[
-              SizedBox(
-                width: 400,
-                height: 650,
-                child: Image.asset("lib/imagens/6_teste.png"),
-              ),
-            ],
-          ),
+        body: ListView(
+          children: <Widget>[
+            SizedBox(
+              width: 400,
+              height: 650,
+              child: Image.asset("lib/imagens/6_teste.png"),
+            ),
+          ],
         ),
         appBar: AppBar(
           title: const Text(

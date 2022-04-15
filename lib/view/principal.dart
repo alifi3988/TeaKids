@@ -43,6 +43,8 @@ class _PrincipaState extends State<Principal> {
         //child: GridView.count(
         //crossAxisCount: 2,
         children: <Widget>[
+          //botaoJogo('t3', "lib/imagens/jogos_imagem/quebra_cabeca.png"),
+          //const SizedBox(height: 25),
           botaoJogos("Jogo da memória", "t3"),
           const SizedBox(height: 25),
           botaoJogos("Jogo das cores", "t4"),
@@ -57,6 +59,8 @@ class _PrincipaState extends State<Principal> {
       ),
     );
   }
+
+  //icone
 
   botaoJogos(rotulo, tela) {
     return SizedBox(
@@ -79,26 +83,47 @@ class _PrincipaState extends State<Principal> {
       ),
     );
   }
-}
 
-
-
-
-//-------------------------------------------------------------------------------------------//
-  /*botao() {
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: () {},
-        splashColor: Colors.green,
-        child: Center(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const <Widget>[
-            Icon(Icons.home, size: 70),
-            Text("Home", style: TextStyle(fontSize: 17.0))
-          ],
-        )),
+  //Criação dos botão com imagem de cada jogo para ficar mais atrativo
+  botaoJogo(tela, caminho) {
+    return SizedBox(
+      width: 100,
+      height: 100,
+      child: ElevatedButton(
+        //evento que será disparado quando o usuário
+        //acionar o botão
+        onPressed: () {
+          Navigator.pushNamed(context, tela);
+        },
+        child: Image.asset(caminho),
+        /*Text(
+          rotulo,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),*/
+        style: ElevatedButton.styleFrom(
+          primary: Color.fromARGB(255, 255, 255, 255),
+        ),
       ),
     );
-  }*/
+  }
+}
+
+//-------------------------------------------------------------------------------------------//
+botao(caminho) {
+  return Card(
+    margin: const EdgeInsets.all(8.0),
+    child: InkWell(
+      onTap: () {},
+      splashColor: Colors.green,
+      child: Center(
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const <Widget>[
+          //Image.network("ksdvjksbzdkvjbszç"), <<-- verificar ocm o professor se aqui teria como colocar imagem
+          Divider(),
+          Text("Home", style: TextStyle(fontSize: 17.0))
+        ],
+      )),
+    ),
+  );
+}

@@ -13,7 +13,13 @@ class _SobreState extends State<Sobre> {
         title: const Text('Sobre'),
         backgroundColor: Colors.indigo.shade600,
       ),
-      body: const Center(child: Text("    Informações sobre o App")),
+      body: const Center(
+        child: Text(
+          '''Informações sobre o App \nAplicativo desenvolvido por \nÁlifi Santos e Rafael Augusto\n FATEC Ribeirão Preto/SP''',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+        ),
+      ),
     );
   }
 }

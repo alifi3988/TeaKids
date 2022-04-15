@@ -65,6 +65,7 @@ flutter:
   - lib/imagens/7_teste.png
   - lib/imagens/8_teste.png
   - lib/imagens/9_teste.png
+  - lib/imagens/jogos_imagem/quebra_cabeca.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
