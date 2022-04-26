@@ -2,7 +2,9 @@
 Projeto em desenvolvimento, para formação do Curso de ADS da FATEC de Ribeirão Preto/SP.
 
 <h3> Objetivo </h3>
-Temos como objetivo desenvolver um aplicativo que contenha jogos de raciocínio (jogo da memória, completar formas ou figuras), interação.
+Temos como objetivo desenvolver um aplicativo que contenha jogos (jogo da memória, completar formas ou figuras) e atividades interativas, voltadas para crianças com TEA (Transtorno do Espectro Autista).
+Nâo temos a itenção de transformar em um aplicativo que trás diagnóstico, ou que seja educativo.
+O objetivo é trazer um aplicativo para lazer.
 A ideia está crua ainda em relação a desenvolvimento.
 
 <h2>Telas do aplicativo </h2>
