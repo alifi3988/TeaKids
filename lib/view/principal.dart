@@ -37,7 +37,7 @@ class _PrincipaState extends State<Principal> {
         title: const Text("Menu"),
         backgroundColor: Colors.indigo.shade600,
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: ListView(
         padding: const EdgeInsets.all(30.0),
         //child: GridView.count(
@@ -101,7 +101,7 @@ class _PrincipaState extends State<Principal> {
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),*/
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 255, 255, 255),
+          primary: const Color.fromARGB(255, 255, 255, 255),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Sobre extends StatefulWidget {
+  const Sobre({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SobreState();
 }

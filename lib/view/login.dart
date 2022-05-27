@@ -1,4 +1,7 @@
+//IMPORTAÇÕES DA CLASSE
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kids/widgets/mensagem.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -9,15 +12,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   //Declaração dos atributos que serão usado
-  //s para
-  //armazenar os dados informados pelo usuário
-  final TextEditingController _mailInputController = TextEditingController();
-  final TextEditingController _passwordINputController =
-      TextEditingController();
-
-  //Declaração de um atributo que identifica unicamente
-  //o formulário
-  var formKey = GlobalKey<FormState>();
+  //para armazenar os dados informados pelo usuário
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +34,13 @@ class _LoginState extends State<Login> {
               child: Image.asset("lib/imagens/cabeca.png"),
             ),
             const SizedBox(height: 25),
-            campoLogin(),
+            caixaTexto("E-mail", "Informe o e-mail", txtEmail, Icons.email),
             const SizedBox(height: 20),
-            campoSenha(),
+            caixaTexto("Senha", "Informe a senha", txtSenha, Icons.lock,
+                senha: true),
             const SizedBox(height: 35),
             botao("Entrar"),
-
-            //o botão login com o google, vai vir aqui
-            //vamos add o ícone do facebook tbb
-            //const Divider(color: Colors.black),
-            const SizedBox(height: 140),
+            const SizedBox(height: 120),
             cadastar(),
             const SizedBox(height: 10),
             recuperar(),
@@ -56,62 +50,30 @@ class _LoginState extends State<Login> {
     );
   }
 
-  //
-  // CAMPO DE TEXTO
-  //
-  //CAMPO DO E-MAIL
-  campoLogin() {
+  //FUNÇÃO DA CAIXA DE TEXTO (E-MAIL E SENHA)
+  caixaTexto(texto, info, controller, icone, {senha}) {
     return TextFormField(
         keyboardType: TextInputType.emailAddress, //mostrar o @ no teclado
-        controller: _mailInputController,
+        controller: controller,
+        obscureText: senha != null ? true : false,
         style: TextStyle(
           fontSize: 20,
           color: Colors.grey.shade900,
         ),
         decoration: InputDecoration(
-          labelText: "E-mail",
-          labelStyle: TextStyle(
-            fontSize: 17,
-            color: Colors.grey.shade600,
-          ),
-          hintText: 'Informe o e-mail',
+          prefixIcon: Icon(icone, color: const Color.fromARGB(255, 25, 0, 255)),
+          prefixIconColor: const Color.fromARGB(255, 0, 60, 255),
+          labelText: texto,
+          labelStyle: const TextStyle(
+              fontSize: 17, color:Color.fromARGB(255, 73, 118, 216)),
+          hintText: info,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
           ),
         ));
   }
 
-  //CAMPO DA SENHA
-  campoSenha() {
-    return TextFormField(
-      //variável associada
-      validator: (value) {
-        if (value!.length < 6) {
-          return caixaDialogo("A senhora deve ter pelo menos 6 caracteres");
-        }
-      },
-      keyboardType: TextInputType.text,
-      controller: _passwordINputController,
-      obscureText: true,
-      style: TextStyle(
-        fontSize: 20,
-        color: Colors.grey.shade900,
-      ),
-      decoration: InputDecoration(
-        labelText: "Senha",
-        labelStyle: TextStyle(
-          fontSize: 17,
-          color: Colors.grey.shade600,
-        ),
-        hintText: 'Informe a senha',
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
-    );
-  }
-
-  // BOTÃO
+  //FUNÇÃO DO BOTÃO
   botao(rotulo) {
     return SizedBox(
       width: 250,
@@ -120,23 +82,7 @@ class _LoginState extends State<Login> {
         //evento que será disparado quando o usuário
         //acionar o botão
         onPressed: () {
-          Navigator.pushReplacementNamed(context, 't2');
-
-          //validação do formulario
-          //O método setState é usado para acessar
-          //os dados fornecidos pelo usuário
-          /*setState(() {
-            String login = _mailInputController.text;
-            String senha = _passwordINputController.text;
-            // ignore: unrelated_type_equality_checks
-            if (login == 'admin@' && senha == 'admin') {
-              caixaDialogo('Seja Bem-Vindo(a)!');
-              Navigator.pushReplacementNamed(context, 't2');
-            } else {
-              caixaDialogo(
-                  'Erro no login!' + '\nLogin: ' + login + '\nSenha: ' + senha);
-            }
-          },);*/
+          login(txtEmail.text, txtSenha.text);
         },
         child: Text(
           rotulo,
@@ -150,18 +96,18 @@ class _LoginState extends State<Login> {
     );
   }
 
+  //Função do cadastrar novo usuário
   cadastar() {
     return TextButton(
       onPressed: () {
         Navigator.pushNamed(context, 't7');
       },
       style: TextButton.styleFrom(primary: Colors.black),
-      child: Text(
-        "Cadastre-se",
-      ),
+      child: const Text("Cadastre-se"),
     );
   }
 
+  //Função recuperar usuário
   recuperar() {
     return TextButton(
       onPressed: () {
@@ -172,10 +118,33 @@ class _LoginState extends State<Login> {
     );
   }
 
-  //
-  // CAIXA DE DIÁLOGO
-  //
+  //Função do Login do e-mail
+  void login(email, senha) {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: senha)
+        .then((res) {
+      caixaDialogo("Seja Bem-Vindo!");
+      Navigator.pushReplacementNamed(context, 't2');
+    }).catchError((e) {
+      //a mensagem de erro será validada com uma classe especial para ela
+      switch (e.code) {
+        case 'invalid-email':
+          erro(context, "E-mail informado é inválido!");
+          break;
+        case 'user-not-found':
+          erro(context, "Usuário não encontrado!");
+          break;
+        case 'wrong-password':
+          erro(context, "Senha incorreta!");
+          break;
+        default:
+          erro(context, e.code.toString());
+          break;
+      }
+    });
+  }
 
+  //Função da caixa de diálogo
   caixaDialogo(msg) {
     return showDialog(
         context: context,
@@ -189,8 +158,8 @@ class _LoginState extends State<Login> {
                     Navigator.of(context).pop();
 
                     setState(() {
-                      _mailInputController.clear();
-                      _passwordINputController.clear();
+                      txtEmail.clear();
+                      txtSenha.clear();
                     });
                   },
                   child: const Text('fechar')),
