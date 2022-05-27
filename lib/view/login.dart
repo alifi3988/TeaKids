@@ -62,14 +62,6 @@ class _LoginState extends State<Login> {
   //CAMPO DO E-MAIL
   campoLogin() {
     return TextFormField(
-        //variável associada
-        validator: (value) {
-          if (value!.length < 5) {
-            return caixaDialogo("Erro, e-mail curto");
-          } else if (!value.contains("@")) {
-            return caixaDialogo("E-mail inválido");
-          }
-        },
         keyboardType: TextInputType.emailAddress, //mostrar o @ no teclado
         controller: _mailInputController,
         style: TextStyle(
@@ -168,34 +160,6 @@ class _LoginState extends State<Login> {
         "Cadastre-se",
       ),
     );
-    /*SizedBox(
-      width: 200,
-      height: 35,
-      child: ElevatedButton(
-        //evento que será disparado quando o usuário
-        //acionar o botão
-        onPressed: () {
-          //validação do formulario
-
-          if (formKey.currentState!.validate()) {
-            //O método setState é usado para acessar
-            //os dados fornecidos pelo usuário
-            setState(() {
-              caixaDialogo("Configurando próxima página...");
-            });
-          }
-        },
-
-        child: const Text(
-          "Cadastar",
-          style: TextStyle(fontSize: 24),
-        ),
-
-        style: ElevatedButton.styleFrom(
-          primary: Colors.indigo.shade600,
-        ),
-      ),
-    );*/
   }
 
   recuperar() {
