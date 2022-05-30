@@ -65,7 +65,7 @@ class _LoginState extends State<Login> {
           prefixIconColor: const Color.fromARGB(255, 0, 60, 255),
           labelText: texto,
           labelStyle: const TextStyle(
-              fontSize: 17, color:Color.fromARGB(255, 73, 118, 216)),
+              fontSize: 17, color: Color.fromARGB(255, 73, 118, 216)),
           hintText: info,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

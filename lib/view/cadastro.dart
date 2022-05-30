@@ -93,13 +93,10 @@ class _CadastroState extends State<Cadastro> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) {
-      try {
-        //Armazenar o nome no Firestore
-        dadosFirebase(res, nome);
-      } on FileSystemException catch (exception, stack) {
-        print(exception);
-        print(stack);
-      }
+      FirebaseFirestore.instance.collection('usuarios').add({
+        "uid": res.user!.uid.toString(),
+        "nome": nome,
+      });
 
       sucesso(context, 'Usuário criado com sucesso.');
       Navigator.pop(context);
@@ -114,13 +111,6 @@ class _CadastroState extends State<Cadastro> {
         default:
           erro(context, e.code.toString());
       }
-    });
-  }
-
-  dadosFirebase(res, nome) {
-    return FirebaseFirestore.instance.collection('usuarios').add({
-      "uid": res.user!.uid.toString(),
-      "nome": nome,
     });
   }
 }
