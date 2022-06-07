@@ -56,29 +56,6 @@ class _RecuperarState extends State<Recuperar> {
         ));
   }
 
-  botao(rotulo) {
-    return SizedBox(
-      width: 250,
-      height: 50,
-      child: ElevatedButton(
-        //evento que será disparado quando o usuário
-        //acionar o botão
-        onPressed: () {
-          caixaDialogo(
-              "E-mail de recuperação encaminhado para o e-mail, por favor, verificar!");
-        },
-        child: Text(
-          rotulo,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-
-        style: ElevatedButton.styleFrom(
-          primary: Colors.indigo.shade600,
-        ),
-      ),
-    );
-  }
-
   caixaDialogo(msg) {
     return showDialog(
         context: context,
