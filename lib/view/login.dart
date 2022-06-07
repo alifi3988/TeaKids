@@ -1,7 +1,9 @@
 //IMPORTAÇÕES DA CLASSE
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kids/widgets/mensagem.dart';
+import 'package:kids/widgets/dia.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -13,8 +15,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   //Declaração dos atributos que serão usado
   //para armazenar os dados informados pelo usuário
+
   var txtEmail = TextEditingController();
   var txtSenha = TextEditingController();
+  var idUser;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class _LoginState extends State<Login> {
                 senha: true),
             const SizedBox(height: 35),
             botao("Entrar"),
-            const SizedBox(height: 120),
+            const SizedBox(height: 100),
             cadastar(),
             const SizedBox(height: 10),
             recuperar(),
@@ -123,6 +127,14 @@ class _LoginState extends State<Login> {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
         .then((res) {
+      
+      FirebaseFirestore.instance
+          .collection('semana')
+          .doc(res.user!.uid.toString())
+          .set({
+        "uid": FirebaseAuth.instance.currentUser!.uid,
+        diaSemana(): true
+      });
       caixaDialogo("Seja Bem-Vindo!");
       Navigator.pushReplacementNamed(context, 't2');
     }).catchError((e) {
@@ -166,5 +178,9 @@ class _LoginState extends State<Login> {
             ],
           );
         });
+  }
+
+  salvarInfomacoes() {
+    diaSemana();
   }
 }

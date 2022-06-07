@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Tela4 extends StatefulWidget {
-  const Tela4({Key? key}) : super(key: key);
+class ResetSenha extends StatelessWidget {
+  const ResetSenha({ Key? key }) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => _Tela4State();
-}
-
-//mudei aqui
-class _Tela4State extends State<Tela4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +13,13 @@ class _Tela4State extends State<Tela4> {
               height: 650,
               child: Image.asset("lib/imagens/9_teste.png"),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              "Esqueceu a senha?",
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
         appBar: AppBar(
@@ -28,5 +29,6 @@ class _Tela4State extends State<Tela4> {
           ),
           backgroundColor: Colors.indigo.shade600,
         ));
+    
   }
 }

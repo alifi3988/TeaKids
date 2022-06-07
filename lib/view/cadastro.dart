@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +14,7 @@ class _CadastroState extends State<Cadastro> {
   var txtNome = TextEditingController();
   var txtEmail = TextEditingController();
   var txtSenha = TextEditingController();
+  var idUser;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,8 @@ class _CadastroState extends State<Cadastro> {
               //evento que será disparado quando o usuário
               //acionar o botão
               onPressed: () {
-                inserirBanco(txtEmail.text, txtSenha.text, txtNome.text);
+                inserirBanco(
+                    txtEmail.text, txtSenha.text, txtNome.text, idUser);
               },
               child: const Text("Registrar",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
@@ -89,17 +89,23 @@ class _CadastroState extends State<Cadastro> {
   }
 
   //inserir no banco de dados o login e senha
-  void inserirBanco(email, senha, nome) {
+  inserirBanco(email, senha, nome, idUser) {
+    String idUser = "";
+    String idTabela = "";
+    //criação das credenciais
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
-        .then((res) {
+        .then((res) async {
+      //guardando o ID na semana, referência
+      print("Inseriu o email e senha");
+      idUser = res.user!.uid.toString();
       FirebaseFirestore.instance.collection('usuarios').add({
-        "uid": res.user!.uid.toString(),
+        "uid": idUser,
         "nome": nome,
+        "id_tb_semana": idTabela,
+      }).then((addUser) {
+        print("Add infromações do usuário");
       });
-
-      sucesso(context, 'Usuário criado com sucesso.');
-      Navigator.pop(context);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':

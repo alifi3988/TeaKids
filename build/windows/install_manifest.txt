@@ -10,6 +10,7 @@ C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/b
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/lib/imagens/9_teste.png
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/lib/imagens/cabeca.png
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/lib/imagens/jogos_imagem/quebra_cabeca.png
+C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/lib/imagens/reset.png
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/NOTICES
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
 C:/Users/alifi/OneDrive - Fatec Centro Paula Souza/FATEC 4 º SEMESTRE/TeaKids/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf

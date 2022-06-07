@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../widgets/mensagem.dart';
 
 class Recuperar extends StatefulWidget {
   const Recuperar({Key? key}) : super(key: key);
@@ -9,6 +11,14 @@ class Recuperar extends StatefulWidget {
 
 //ainda em criação
 class _RecuperarState extends State<Recuperar> {
+  final txtEmail = TextEditingController();
+
+  @override
+  void dispose() {
+    txtEmail.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,29 +26,74 @@ class _RecuperarState extends State<Recuperar> {
         title: const Text('Recuperar senha'),
         backgroundColor: Colors.indigo.shade600,
       ),
-      body: ListView(
+      body: Container(
         padding: const EdgeInsets.only(
           top: 60,
           left: 40,
           right: 40,
         ),
-        children: <Widget>[
-          const Text(
-            "Informe o seu e-mail para recuperar a senha",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-          ),
-          CaixaTexto('E-mail', 'Informe o seu e-mail'),
-          const SizedBox(height: 15),
-          botao("Enviar")
-        ],
+        color: Colors.white,
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset("lib/imagens/reset.png"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Center(
+              child: Text(
+                "Esqueceu a senha?",
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Por favor, informar o e-mail associado a sua conta, para que possa ser enviado um link com as instruções para recuperar a sua senha.",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            CaixaTexto("E-mail", txtEmail),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: 250,
+              height: 50,
+              child: ElevatedButton(
+                //evento que será disparado quando o usuário
+                //acionar o botão
+                onPressed: () {
+                  enviarEmail();
+                },
+                child: const Text(
+                  "Enviar",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.indigo.shade600,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  CaixaTexto(campo, descricao) {
+  CaixaTexto(campo, controller) {
     return TextFormField(
-        //controller: _mailInputController,
+        controller: controller,
+        keyboardType: TextInputType.emailAddress,
         style: TextStyle(
           fontSize: 20,
           color: Colors.grey.shade900,
@@ -46,10 +101,9 @@ class _RecuperarState extends State<Recuperar> {
         decoration: InputDecoration(
           labelText: campo,
           labelStyle: TextStyle(
-            fontSize: 17,
+            fontSize: 20,
             color: Colors.grey.shade600,
           ),
-          hintText: descricao,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -72,5 +126,32 @@ class _RecuperarState extends State<Recuperar> {
             ],
           );
         });
+  }
+
+  ///função para realizar o envio do e-mail para criar uma nova senha
+  Future enviarEmail() async {
+    //circulo que carrega enquanto busca as informações
+    /**showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));**/
+
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: txtEmail.text.trim())
+        .then((res) {
+      Navigator.pushReplacementNamed(context, 't1');
+      caixaDialogo(
+          "Encaminhado para o e-mail informado! Verifique a caixa de Spam");
+    }).catchError((e) {
+      switch (e.code) {
+        case 'user-not-found':
+          erro(context, "Usuário não localizado.");
+          break;
+        default:
+          erro(context, e.code.toString());
+      }
+    });
   }
 }
