@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Tela2 extends StatefulWidget {
+  const Tela2({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _Tela2State();
 }

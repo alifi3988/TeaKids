@@ -30,7 +30,7 @@ Future<void> main() async {
         't1': (context) => const Login(),
         't2': (context) => const Principal(),
         't3': (context) => Tela1(),
-        't4': (context) => Tela2(),
+        't4': (context) => const Tela2(),
         't5': (context) => Tela3(),
         't6': (context) => const ResetSenha(),
         't7': (context) => const Cadastro(),

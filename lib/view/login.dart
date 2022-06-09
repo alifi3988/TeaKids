@@ -172,15 +172,60 @@ class _LoginState extends State<Login> {
         });
   }
 
-  /*retornarDocumentoById(id) async{
-    await FirebaseFirestore.instance
-      .collection('cafes')
-      .doc(id)
-      .get()
-      .then((doc){
-        txtNome.text = doc.get('nome');
-        txtPreco.text = doc.get('preco');
-      });
-  }*/
+  modificadorData() async {
+    var id = ModalRoute.of(context)!.settings.arguments;
+    var idSemana;
+    bool seg = false,
+        ter = false,
+        qur = false,
+        qui = false,
+        sex = false,
+        sab = false,
+        dom = false;
 
+    //pegando os valores
+    FirebaseFirestore.instance
+        .collection("semana")
+        .doc(id.toString())
+        .get()
+        .then((doc) {
+      seg = doc.get('Segunda');
+      ter = doc.get('Terca');
+      qur = doc.get('Quarta');
+      qui = doc.get('Quinta');
+      sex = doc.get('Sexta');
+      sab = doc.get('Sabado');
+      dom = doc.get('Domingo');
+    });
+
+    String dia = diaSemanaString();
+
+    if (dia == 'Segunda') {
+      seg = true;
+    } else if (dia == 'Terca') {
+      ter = true;
+    } else if (dia == 'Quarta') {
+      qur = true;
+    } else if (dia == 'Quinta') {
+      qui = true;
+    } else if (dia == 'Sexta') {
+      sex = true;
+    } else if (dia == 'Sabado') {
+      sab = true;
+    } else if (dia == 'Domingo') {
+      dom = true;
+    }
+
+    FirebaseFirestore.instance.collection('semana').doc(id.toString()).set({
+      "Segunda": seg,
+      "Terca": ter,
+      "Quarta": qur,
+      "Quinta": qui,
+      "Sexta": sex,
+      "Sabado": sab,
+      "Domingo": dom
+    }).then((value) {
+      print("Atualizado com sucesso!");
+    });
+  }
 }

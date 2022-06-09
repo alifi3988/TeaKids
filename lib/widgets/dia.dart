@@ -29,7 +29,7 @@ diaSemanaString() {
       semana = "Sexta";
       break;
     case 6:
-      semana = "Sábado";
+      semana = "Sabado";
       break;
   }
 

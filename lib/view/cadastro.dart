@@ -95,8 +95,7 @@ class _CadastroState extends State<Cadastro> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) async {
-      tabelSemana(res);
-      tabelUsers(nome, res);
+      tabelUser(res, nome);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -111,9 +110,11 @@ class _CadastroState extends State<Cadastro> {
     });
   }
 
-  tabelSemana(res) {
-    FirebaseFirestore.instance.collection('semana').add({
-      "uid": res.user!.uid.toString(),
+  tabelUser(res, nome) {
+    FirebaseFirestore.instance
+        .collection('semana')
+        .doc(res.user!.uid.toString())
+        .set({
       "Segunda": false,
       "Terca": false,
       "Quarta": false,
@@ -122,29 +123,15 @@ class _CadastroState extends State<Cadastro> {
       "Sabado": false,
       "Domingo": false,
     }).then((addTable) {
-      idTabela = addTable.id.toString();
-      print("Primeiro ID: " + idTabela);
-    }).catchError((onError) {
-      switch (onError.code) {
-        default:
-          erro(context, onError.code.toString());
-          print("Erro addSemana: " + onError.code.toString());
-      }
-    });
-  }
-
-  void tabelUsers(nome, res) {
-    FirebaseFirestore.instance.collection('usuarios').add({
-      "uid": res.user!.uid.toString(),
-      "nome": nome,
-    }).then((addUser) {
-      print("todas as informações foram add");
-    }).catchError((itError) {
-      switch (itError.code) {
-        default:
-          erro(context, itError.code.toString());
-          print("Erro addUser: " + itError.code.toString());
-      }
+      FirebaseFirestore.instance.collection('usuarios').add({
+        "uid": res.user!.uid.toString(),
+        "nome": nome,
+      }).catchError((itError) {
+        switch (itError.code) {
+          default:
+            erro(context, itError.code.toString());
+        }
+      });
     });
   }
 }
