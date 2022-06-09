@@ -16,6 +16,7 @@ class _CadastroState extends State<Cadastro> {
   var txtSenha = TextEditingController();
   var idUser = "";
   var idTabela = "";
+  var cod1, cod2, cod3, cod4, cod5, cod6, cod7;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,7 @@ class _CadastroState extends State<Cadastro> {
                 inserirBanco(
                     txtEmail.text, txtSenha.text, txtNome.text, idUser);
               },
+
               child: const Text("Registrar",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
@@ -95,7 +97,77 @@ class _CadastroState extends State<Cadastro> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) async {
-      tabelUser(res, nome);
+      FirebaseFirestore.instance
+          .collection('usuarios')
+          .add({
+            "uid": res.user!.uid.toString(),
+            "nome": nome,
+            "idSeg": cod1,
+            "idTer": cod2,
+            "idQur": cod3,
+            "idQui": cod4,
+            "idSex": cod5,
+            "idSab": cod6,
+            "idDom": cod7,
+          })
+          .then((value) {})
+          .catchError((itError) {
+            switch (itError.code) {
+              default:
+                erro(context, itError.code.toString());
+            }
+          });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Segunda',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod1 = value.id.toString();
+
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Terça',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod2 = value.id.toString();
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Quarta',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod3 = value.id.toString();
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Quinta',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod4 = value.id.toString();
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Sexta',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod5 = value.id.toString();
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Sábado',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod6 = value.id.toString();
+      });
+      FirebaseFirestore.instance.collection('semana').add({
+        "uid": res.user!.uid.toString(),
+        "dia": 'Domingo',
+        "valor": 'Não acessou',
+      }).then((value) {
+        cod7 = value.id.toString();
+      });
+      Navigator.pushReplacementNamed(context, 't1');
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -107,31 +179,6 @@ class _CadastroState extends State<Cadastro> {
         default:
           erro(context, e.code.toString());
       }
-    });
-  }
-
-  tabelUser(res, nome) {
-    FirebaseFirestore.instance
-        .collection('semana')
-        .doc(res.user!.uid.toString())
-        .set({
-      "Segunda": false,
-      "Terca": false,
-      "Quarta": false,
-      "Quinta": false,
-      "Sexta": false,
-      "Sabado": false,
-      "Domingo": false,
-    }).then((addTable) {
-      FirebaseFirestore.instance.collection('usuarios').add({
-        "uid": res.user!.uid.toString(),
-        "nome": nome,
-      }).catchError((itError) {
-        switch (itError.code) {
-          default:
-            erro(context, itError.code.toString());
-        }
-      });
     });
   }
 }

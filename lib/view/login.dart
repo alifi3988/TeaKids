@@ -127,8 +127,8 @@ class _LoginState extends State<Login> {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
         .then((res) {
-      caixaDialogo("Seja Bem-Vindo!");
       Navigator.pushReplacementNamed(context, 't2');
+      modificadorData(res.user!.uid.toString());
     }).catchError((e) {
       //a mensagem de erro será validada com uma classe especial para ela
       switch (e.code) {
@@ -172,24 +172,17 @@ class _LoginState extends State<Login> {
         });
   }
 
-  modificadorData() async {
-    var id = ModalRoute.of(context)!.settings.arguments;
-    var idSemana;
-    bool seg = false,
-        ter = false,
-        qur = false,
-        qui = false,
-        sex = false,
-        sab = false,
-        dom = false;
-
+  modificadorData(id) {
+    String seg = 'Não acessou',
+        ter = 'Não acessou',
+        qur = 'Não acessou',
+        qui = 'Não acessou',
+        sex = 'Não acessou',
+        sab = 'Não acessou',
+        dom = 'Não acessou';
     //pegando os valores
-    FirebaseFirestore.instance
-        .collection("semana")
-        .doc(id.toString())
-        .get()
-        .then((doc) {
-      seg = doc.get('Segunda');
+    FirebaseFirestore.instance.collection("semana").doc(id).get().then((doc) {
+      seg = doc.get('Dia');
       ter = doc.get('Terca');
       qur = doc.get('Quarta');
       qui = doc.get('Quinta');
@@ -198,22 +191,24 @@ class _LoginState extends State<Login> {
       dom = doc.get('Domingo');
     });
 
+    //pegando o dia da semana atual
     String dia = diaSemanaString();
 
+    //fazendo uma verificação e clocadno tru na data atual
     if (dia == 'Segunda') {
-      seg = true;
+      seg = 'Segunda';
     } else if (dia == 'Terca') {
-      ter = true;
+      ter = 'Terca';
     } else if (dia == 'Quarta') {
-      qur = true;
+      qur = 'Quarta';
     } else if (dia == 'Quinta') {
-      qui = true;
+      qui = 'Quinta';
     } else if (dia == 'Sexta') {
-      sex = true;
+      sex = 'Sexta';
     } else if (dia == 'Sabado') {
-      sab = true;
+      sab = 'Sabado';
     } else if (dia == 'Domingo') {
-      dom = true;
+      dom = 'Domingo';
     }
 
     FirebaseFirestore.instance.collection('semana').doc(id.toString()).set({
@@ -223,9 +218,8 @@ class _LoginState extends State<Login> {
       "Quinta": qui,
       "Sexta": sex,
       "Sabado": sab,
-      "Domingo": dom
-    }).then((value) {
-      print("Atualizado com sucesso!");
+      "Domingo": dom,
+      "uid" : FirebaseAuth.instance.currentUser!.uid,
     });
   }
 }
