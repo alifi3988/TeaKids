@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
         .signInWithEmailAndPassword(email: email, password: senha)
         .then((res) {
       Navigator.pushReplacementNamed(context, 't2');
-      modificadorData(res.user!.uid.toString());
+      //modificadorData(res.user!.uid.toString());
     }).catchError((e) {
       //a mensagem de erro será validada com uma classe especial para ela
       switch (e.code) {

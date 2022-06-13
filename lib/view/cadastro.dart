@@ -16,8 +16,6 @@ class _CadastroState extends State<Cadastro> {
   var txtSenha = TextEditingController();
   var idUser = "";
   var idTabela = "";
-  var cod1, cod2, cod3, cod4, cod5, cod6, cod7;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +92,7 @@ class _CadastroState extends State<Cadastro> {
   //inserir no banco de dados o login e senha
   inserirBanco(email, senha, nome, idUser) {
     //criação das credenciais
+    var cod1, cod2, cod3, cod4, cod5, cod6, cod7;
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) async {
@@ -123,7 +122,6 @@ class _CadastroState extends State<Cadastro> {
         "valor": 'Não acessou',
       }).then((value) {
         cod1 = value.id.toString();
-
       });
       FirebaseFirestore.instance.collection('semana').add({
         "uid": res.user!.uid.toString(),
