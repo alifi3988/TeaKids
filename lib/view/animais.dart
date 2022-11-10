@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ResetSenha extends StatelessWidget {
-  const ResetSenha({ Key? key }) : super(key: key);
+class Animais extends StatelessWidget {
+  const Animais({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

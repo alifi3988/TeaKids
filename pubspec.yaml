@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  image_picker: ^0.8.4+2
  
 
 
@@ -76,6 +77,11 @@ flutter:
   - lib/imagens/9_teste.png
   - lib/imagens/reset.png
   - lib/imagens/jogos_imagem/quebra_cabeca.png
+  - lib/imagens/iconCamera.png
+  - lib/imagens/bt_animais.png
+  - lib/imagens/bt_cores.png
+  - lib/imagens/bt_memoria.png
+  - lib/imagens/bt_raciocinio.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Tela3 extends StatefulWidget {
+class Raciocinio extends StatefulWidget {
+  const Raciocinio({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _Tela3State();
+  State<StatefulWidget> createState() => _Raciocinio();
 }
 
-class _Tela3State extends State<Tela3> {
+class _Raciocinio extends State<Raciocinio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

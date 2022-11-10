@@ -11,11 +11,21 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
+  /*final FirebaseStorage storage = FirebaseSorted.instance;
+
+  //Criando o método para recuperar as imagens da galeria
+  Future<XFile?> getImage() async{
+    final ImagePicker _ picker = ImagePicker();
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    return image;
+  }*/
+
   var txtNome = TextEditingController();
   var txtEmail = TextEditingController();
   var txtSenha = TextEditingController();
   var idUser = "";
   var idTabela = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,92 +101,37 @@ class _CadastroState extends State<Cadastro> {
 
   //inserir no banco de dados o login e senha
   inserirBanco(email, senha, nome, idUser) {
+    var idSemana = "";
+
+    //Criando a tabela da semana para o usuário, onde irá conter as informações dos dias acessados
+    FirebaseFirestore.instance.collection('semana').add({
+      "domingo": false,
+      "segunda": false,
+      "terca": false,
+      "quarta": false,
+      "quinta": false,
+      "sexta": false,
+      "sabado": false,
+    }).then((value) {
+      idSemana = value.id.toString();
+    });
     //criação das credenciais
-    var cod1, cod2, cod3, cod4, cod5, cod6, cod7;
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: senha)
         .then((res) async {
-      FirebaseFirestore.instance
-          .collection('usuarios')
-          .add({
-            "uid": res.user!.uid.toString(),
-            "nome": nome,
-            "idSeg": cod1,
-            "idTer": cod2,
-            "idQur": cod3,
-            "idQui": cod4,
-            "idSex": cod5,
-            "idSab": cod6,
-            "idDom": cod7,
-          })
-          .then((value) {})
-          .catchError((itError) {
-            switch (itError.code) {
-              default:
-                erro(context, itError.code.toString());
-            }
-          });
-      FirebaseFirestore.instance.collection('semana').add({
+      FirebaseFirestore.instance.collection('usuarios').add({
         "uid": res.user!.uid.toString(),
-        "dia": 'Segunda',
-        "valor": 'Não acessou',
+        "nome": nome,
+        "idTabela": idSemana,
       }).then((value) {
-        cod1 = value.id.toString();
+        Navigator.of(context).pop();
+        sucesso(context, "Usuário " + nome + " cadastro com sucesso!");
+      }).catchError((itError) {
+        switch (itError.code) {
+          default:
+            erro(context, itError.code.toString());
+        }
       });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Terça',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod2 = value.id.toString();
-      });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Quarta',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod3 = value.id.toString();
-      });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Quinta',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod4 = value.id.toString();
-      });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Sexta',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod5 = value.id.toString();
-      });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Sábado',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod6 = value.id.toString();
-      });
-      FirebaseFirestore.instance.collection('semana').add({
-        "uid": res.user!.uid.toString(),
-        "dia": 'Domingo',
-        "valor": 'Não acessou',
-      }).then((value) {
-        cod7 = value.id.toString();
-      });
-      Navigator.pushReplacementNamed(context, 't1');
-    }).catchError((e) {
-      switch (e.code) {
-        case 'email-already-in-use':
-          erro(context, 'O email já foi cadastrado.');
-          break;
-        case 'invalid-email':
-          erro(context, 'O email é inválido.');
-          break;
-        default:
-          erro(context, e.code.toString());
-      }
     });
   }
 }

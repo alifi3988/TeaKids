@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Tela1 extends StatefulWidget {
+class Memoria extends StatefulWidget {
+  const Memoria({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _Tela1State();
+  State<StatefulWidget> createState() => _Memoria();
 }
 
-class _Tela1State extends State<Tela1> {
+class _Memoria extends State<Memoria> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

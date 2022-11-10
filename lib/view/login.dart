@@ -1,9 +1,7 @@
 //IMPORTAÇÕES DA CLASSE
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kids/widgets/mensagem.dart';
-import 'package:kids/widgets/dia.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -18,7 +16,6 @@ class _LoginState extends State<Login> {
 
   var txtEmail = TextEditingController();
   var txtSenha = TextEditingController();
-  var idUser;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +101,7 @@ class _LoginState extends State<Login> {
   cadastar() {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, 't7');
+        Navigator.pushNamed(context, 'Cadastro');
       },
       style: TextButton.styleFrom(primary: Colors.black),
       child: const Text("Cadastre-se"),
@@ -115,7 +112,7 @@ class _LoginState extends State<Login> {
   recuperar() {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, 't10');
+        Navigator.pushNamed(context, 'Recuperar');
       },
       style: TextButton.styleFrom(primary: Colors.black),
       child: const Text("Recuperar a senha"),
@@ -127,7 +124,7 @@ class _LoginState extends State<Login> {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
         .then((res) {
-      Navigator.pushReplacementNamed(context, 't2');
+      Navigator.pushReplacementNamed(context, 'Principal');
       //modificadorData(res.user!.uid.toString());
     }).catchError((e) {
       //a mensagem de erro será validada com uma classe especial para ela
@@ -170,56 +167,5 @@ class _LoginState extends State<Login> {
             ],
           );
         });
-  }
-
-  modificadorData(id) {
-    String seg = 'Não acessou',
-        ter = 'Não acessou',
-        qur = 'Não acessou',
-        qui = 'Não acessou',
-        sex = 'Não acessou',
-        sab = 'Não acessou',
-        dom = 'Não acessou';
-    //pegando os valores
-    FirebaseFirestore.instance.collection("semana").doc(id).get().then((doc) {
-      seg = doc.get('Dia');
-      ter = doc.get('Terca');
-      qur = doc.get('Quarta');
-      qui = doc.get('Quinta');
-      sex = doc.get('Sexta');
-      sab = doc.get('Sabado');
-      dom = doc.get('Domingo');
-    });
-
-    //pegando o dia da semana atual
-    String dia = diaSemanaString();
-
-    //fazendo uma verificação e clocadno tru na data atual
-    if (dia == 'Segunda') {
-      seg = 'Segunda';
-    } else if (dia == 'Terca') {
-      ter = 'Terca';
-    } else if (dia == 'Quarta') {
-      qur = 'Quarta';
-    } else if (dia == 'Quinta') {
-      qui = 'Quinta';
-    } else if (dia == 'Sexta') {
-      sex = 'Sexta';
-    } else if (dia == 'Sabado') {
-      sab = 'Sabado';
-    } else if (dia == 'Domingo') {
-      dom = 'Domingo';
-    }
-
-    FirebaseFirestore.instance.collection('semana').doc(id.toString()).set({
-      "Segunda": seg,
-      "Terca": ter,
-      "Quarta": qur,
-      "Quinta": qui,
-      "Sexta": sex,
-      "Sabado": sab,
-      "Domingo": dom,
-      "uid" : FirebaseAuth.instance.currentUser!.uid,
-    });
   }
 }

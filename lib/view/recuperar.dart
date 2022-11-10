@@ -141,7 +141,7 @@ class _RecuperarState extends State<Recuperar> {
     await FirebaseAuth.instance
         .sendPasswordResetEmail(email: txtEmail.text.trim())
         .then((res) {
-      Navigator.pushReplacementNamed(context, 't1');
+      Navigator.pushReplacementNamed(context, 'Login');
       caixaDialogo(
           "Encaminhado para o e-mail informado! Verifique a caixa de Spam");
     }).catchError((e) {

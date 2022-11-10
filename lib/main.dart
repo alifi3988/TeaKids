@@ -23,20 +23,20 @@ Future<void> main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TEA KIDS', //nome do porjeto
-      initialRoute: 't1', //primeira tela a ser chamada
+      initialRoute: 'Login', //primeira tela a ser chamada
       routes: {
         //rotulos das telas, para faciliar chamá-las
         //terá a criação da tela de apresentação Splash Screen
-        't1': (context) => const Login(),
-        't2': (context) => const Principal(),
-        't3': (context) => Tela1(),
-        't4': (context) => const Tela2(),
-        't5': (context) => Tela3(),
-        't6': (context) => const ResetSenha(),
-        't7': (context) => const Cadastro(),
-        't8': (context) => const Relatorio(),
-        't9': (context) => const Sobre(),
-        't10': (context) => const Recuperar(),
+        'Login': (context) => const Login(),
+        'Principal': (context) => const Principal(),
+        'Memoria': (context) => const Memoria(),
+        'Cores': (context) => const Cores(),
+        'Raciocinio': (context) => const Raciocinio(),
+        'Animais': (context) => const Animais(),
+        'Cadastro': (context) => const Cadastro(),
+        'Relatorio': (context) => const Relatorio(),
+        'Sobre': (context) => const Sobre(),
+        'Recuperar': (context) => const Recuperar(),
         //terá a criação da tela de relatório (pensar em como será essa telá, para quem mandará)
       },
     ),
